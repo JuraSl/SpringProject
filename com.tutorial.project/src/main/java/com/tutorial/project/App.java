@@ -5,8 +5,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 	
-    Client client;
-	ConsoleEventLogger eventLogger;
+    private Client client;
+	private EventLogger eventLogger;
 	
 	public static void main(String[] args) {
 		App app = new App();
