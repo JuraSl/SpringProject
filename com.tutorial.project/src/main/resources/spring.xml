@@ -6,9 +6,13 @@
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
 	<bean id="client" class="com.tutorial.project.Client">
+	      <constructor-arg index="0" value="1" />
+	      <constructor-arg value = "Sam"/>
 	</bean>
 	
-	<bean id="app" class="com.tutorial.project.App">    
+	<bean id="app" class="com.tutorial.project.App">
+	      <constructor-arg ref="client" />
+	      <constructor-arg ref="eventLogger"/>     
 	</bean>
 	
 	<bean id="eventLogger" class="com.tutorial.project.EventLogger">
