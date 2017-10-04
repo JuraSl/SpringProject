@@ -32,7 +32,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/User/Desktop/FrameWorks @ Libraries/spring-core-3.1.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/Users/User/Desktop/FrameWorks @ Libraries/spring-context-4.2.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/FrameWorks @ Libraries/spring-core-4.3.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/FrameWorks @ Libraries/spring-jdbc-5.0.0.RC3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/FrameWorks @ Libraries/spring-tx-5.0.0.RC3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
