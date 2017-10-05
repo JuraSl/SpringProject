@@ -24,10 +24,25 @@
 	      </constructor-arg>
           <constructor-arg  ref="dateFormat"/>
 	</bean>
+	
 	<!-- using factory-method we invoke static method to create an object -->
 	<bean id = "dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"></bean>
 	
-	</beans>
+	<bean id="fileEventLogger" class="com.tutorial.project.FileEventLogger" 
+	      init-method="init">
+	      <constructor-arg value="target/events_log.txt"/>
+	</bean>
+	
+	<bean id="cacheFileEventLogger" class="com.tutorial.project.CacheFileEventLogger" 
+	      destroy-method="destroy" init-method="init">
+	      <constructor-arg value="target/events_log.txt"/>
+	      <constructor-arg value="4"/>
+	</bean>
+	
+	
+	
+	
+</beans>
 	
 	
 	

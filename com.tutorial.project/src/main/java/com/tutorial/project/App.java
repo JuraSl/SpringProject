@@ -1,6 +1,7 @@
 package com.tutorial.project;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
@@ -17,7 +18,8 @@ public class App {
 	public static void main(String[] args) {
 		
 		// Create spring container object
-	    ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		// this context has method "close" and registerShutdownHook()
+	    ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		
 	    // Get bean from container
 	    App app = (App) ctx.getBean("app");
@@ -27,6 +29,8 @@ public class App {
 	   
 	    event = ctx.getBean(Event.class);
 	    app.logEvent(event, "Some event for 2");
+	    
+	    ctx.close();
 		}
 		
 	private void logEvent(Event event, String msg) {
