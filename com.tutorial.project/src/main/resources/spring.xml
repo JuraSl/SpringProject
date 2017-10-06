@@ -15,9 +15,6 @@
 	      <constructor-arg ref="eventLogger"/>     
 	</bean>
 	
-	<bean id="eventLogger" class="com.tutorial.project.ConsoleEventLogger">
-	</bean>
-	
 	<bean id = "event" class = "com.tutorial.project.Event" scope="prototype">
 	      <constructor-arg>
 	            <bean class = "java.util.Date"/>
@@ -27,21 +24,8 @@
 	
 	<!-- using factory-method we invoke static method to create an object -->
 	<bean id = "dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"></bean>
-	
-	<bean id="fileEventLogger" class="com.tutorial.project.FileEventLogger" 
-	      init-method="init">
-	      <constructor-arg value="target/events_log.txt"/>
-	</bean>
-	
-	<bean id="cacheFileEventLogger" class="com.tutorial.project.CacheFileEventLogger" 
-	      destroy-method="destroy" init-method="init">
-	      <constructor-arg value="target/events_log.txt"/>
-	      <constructor-arg value="4"/>
-	</bean>
-	
-	
-	
-	
+		
+	<import resource="loggers.xml"/>	
 </beans>
 	
 	

@@ -18,7 +18,7 @@ public class App {
 	public static void main(String[] args) {
 		
 		// Create spring container object
-		// this context has method "close" and registerShutdownHook()
+		// this context has method registerShutdownHook() that invokes method close()
 	    ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		
 	    // Get bean from container
@@ -30,6 +30,7 @@ public class App {
 	    event = ctx.getBean(Event.class);
 	    app.logEvent(event, "Some event for 2");
 	    
+	    // closing context
 	    ctx.close();
 		}
 		
