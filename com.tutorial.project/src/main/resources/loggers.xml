@@ -17,7 +17,17 @@
 	      <constructor-arg value="4"/>
 	</bean>
 	
-	<bean id="eventLogger" class="com.tutorial.project.ConsoleEventLogger">
+	<bean id="eventLogger" class="com.tutorial.project.ConsoleEventLogger"/>	
+	<bean id="consoleEventLogger" class="com.tutorial.project.ConsoleEventLogger" />
+	
+	<!-- Creates bean and Collection of inner beans for constructor -->
+	<bean id="combinedEventLogger" class="com.tutorial.project.CombinedEventLogger">
+	      <constructor-arg>
+	           <list>
+	               <ref bean="fileEventLogger"/>
+	               <ref bean="consoleEventLogger"/>
+	            </list>
+	      </constructor-arg>
 	</bean>
 	
 </beans>

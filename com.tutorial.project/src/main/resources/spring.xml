@@ -8,6 +8,7 @@
 	<bean id="client" class="com.tutorial.project.Client">
 	      <constructor-arg index="0" value="1" />
 	      <constructor-arg value = "Sam"/>
+	      <property name="greeting" value="Hello there!!!"></property>
 	</bean>
 	
 	<bean id="app" class="com.tutorial.project.App">
