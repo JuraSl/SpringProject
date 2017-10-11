@@ -1,5 +1,7 @@
 package com.tutorial.project;
 
+import java.util.Map;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -7,12 +9,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class App {
 	
     private Client client;
-	private EventLogger eventLogger;
+	private EventLogger defaultLogger;
+	private Map<EventType, EventLogger> loggers;
 	
-	App(Client client, EventLogger eventLogger){
+	App(Client client, CacheFileEventLogger eventLogger, Map<EventType, EventLogger> loggers){
 		super();
 		this.client = client;
-		this.eventLogger = eventLogger;
+		this.defaultLogger = eventLogger;
+		this.loggers = loggers;
 	};
 	
 	public static void main(String[] args) {
@@ -25,18 +29,28 @@ public class App {
 	    App app = (App) ctx.getBean("app");
 		
 	    Event event = ctx.getBean(Event.class);
-	    app.logEvent(event, "Some event for 1");
+	    //app.logEvent(EventType.ERROR, event, "Some event for 1");
 	   
 	    event = ctx.getBean(Event.class);
-	    app.logEvent(event, "Some event for 2");
+	    app.logEvent(EventType.INFO, event, "Some event for 2");
+	    
+	    event = ctx.getBean(Event.class);
+	    app.logEvent(null, event, "Some event for 3");
 	    
 	    // closing context
 	    ctx.close();
 		}
 		
-	private void logEvent(Event event, String msg) {
+	private void logEvent(EventType Eventtype, Event event, String msg) {
 		String message = msg.replaceAll(client.getId(), client.getName());
 		event.setMsg(message);
-		eventLogger.logEvent(event);
+		defaultLogger.logEvent(event);
+		
+		EventLogger logger = loggers.get(Eventtype);
+		
+		if(logger == null){
+		   logger = defaultLogger;
+		}
+		logger.logEvent(event);
 	}
 }

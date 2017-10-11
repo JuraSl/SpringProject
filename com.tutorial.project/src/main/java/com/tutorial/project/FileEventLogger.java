@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 
-public class FileEventLogger {
+public class FileEventLogger implements EventLogger{
 
 	public FileEventLogger(String fileName) {
 		super();

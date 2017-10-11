@@ -12,8 +12,14 @@
 	</bean>
 	
 	<bean id="app" class="com.tutorial.project.App">
-	      <constructor-arg ref="client" />
-	      <constructor-arg ref="eventLogger"/>     
+	      <constructor-arg ref="client"/>
+	      <constructor-arg ref="cacheFileEventLogger"/>
+	      <constructor-arg>
+	           <map>
+	               <entry key="ERROR" value-ref="consoleEventLogger"/>
+	               <entry key="INFO" value-ref="combinedEventLogger"/>
+	           </map>
+	      </constructor-arg>    
 	</bean>
 	
 	<bean id = "event" class = "com.tutorial.project.Event" scope="prototype">
