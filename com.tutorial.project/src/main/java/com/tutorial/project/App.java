@@ -29,7 +29,7 @@ public class App {
 	    App app = (App) ctx.getBean("app");
 		
 	    Event event = ctx.getBean(Event.class);
-	    //app.logEvent(EventType.ERROR, event, "Some event for 1");
+	    app.logEvent(EventType.ERROR, event, "Some event for 1");
 	   
 	    event = ctx.getBean(Event.class);
 	    app.logEvent(EventType.INFO, event, "Some event for 2");
