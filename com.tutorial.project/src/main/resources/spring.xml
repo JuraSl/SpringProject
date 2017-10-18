@@ -18,10 +18,7 @@
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true" />
-        <property name="systemPropertiesMode">
-            <util:constant
-                static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-        </property>
+        <property name="systemPropertiesMode"/>
     </bean>
     
     <util:map id="loggerMap">

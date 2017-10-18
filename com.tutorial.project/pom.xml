@@ -3,7 +3,7 @@
   <groupId>com.tutorial.project</groupId>
   <artifactId>com.tutorial.project</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>com.tutorial.project</name>
+  <name>Spring Basics Project</name>
   
   <dependencies>
       <dependency>
