@@ -9,7 +9,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+@SuppressWarnings("restriction")
+@Component
 public class AwareBean implements ApplicationContextAware, BeanNameAware, 
              ApplicationEventPublisherAware{
 	
@@ -17,6 +21,7 @@ public class AwareBean implements ApplicationContextAware, BeanNameAware,
 	private String name;
 	private ApplicationContext ctx;
 	
+	@PostConstruct
 	public void init() {
 		System.out.println(this.getClass().getSimpleName() + " > My name is '"
 				+ name + "'");

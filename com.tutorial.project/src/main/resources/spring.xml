@@ -6,7 +6,7 @@
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:c="http://www.springframework.org/schema/c"
     xsi:schemaLocation="
- 		http://www.springframework.org/schema/beans
+  		http://www.springframework.org/schema/beans
  		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
  		http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-3.2.xsd">
@@ -18,43 +18,56 @@
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true" />
-        <property name="systemPropertiesMode"/>
+        <property name="systemPropertiesMode">
+            <util:constant
+                static-field="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        </property>
     </bean>
     
     <util:map id="loggerMap">
 	     <entry key="INFO" value-ref="consoleEventLogger"/>
 	     <entry key="ERROR" value-ref="combinedEventLogger"/>
     </util:map>
-
+ 
+	<bean id="client" class="com.tutorial.project.Client">
+	      <constructor-arg index="0" value="1" />
+	      <constructor-arg value = "Sam"/>
+	      <property name="greeting" value="Hello there!!!"></property>
+	</bean>
 	<bean id="client" class="com.tutorial.project.Client" 
-	      p:greeting="${greeting}">
-	      <constructor-arg index="0" value="${id}" />
-	      <constructor-arg value = "${name}"/>
-	</bean>
-	
-	<bean id="app" class="com.tutorial.project.App">
-	      <constructor-arg ref="client"/>
-	      <constructor-arg ref="cacheFileEventLogger"/>
-	      <constructor-arg ref="loggerMap"/>    
-	</bean>
-	
-	<bean id = "event" class = "com.tutorial.project.Event" scope="prototype">
+	      p:greeting="${client.greeting}">
+	      <constructor-arg index="0" value="${client.id}" />
+	      <constructor-arg value = "${client.name}"/>
+ 	</bean>
+ 	
+ 	<bean id="app" class="com.tutorial.project.App">
+ 	      <constructor-arg ref="client"/>
+ 	      <constructor-arg ref="cacheFileEventLogger"/>
 	      <constructor-arg>
-	            <bean class = "java.util.Date"/>
-	      </constructor-arg>
-          <constructor-arg  ref="dateFormat"/>
-	</bean>
-	
-	<!-- using factory-method we invoke static method to create an object -->
-	<bean id = "dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"></bean>
+	           <map>
+	               <entry key="ERROR" value-ref="consoleEventLogger"/>
+	               <entry key="INFO" value-ref="combinedEventLogger"/>
+	           </map>
+	      </constructor-arg>    
+	      <constructor-arg ref="loggerMap"/>    
+ 	</bean>
+ 	
+ 	<bean id = "event" class = "com.tutorial.project.Event" scope="prototype">
+ 	      <constructor-arg>
+ 	            <bean class = "java.util.Date"/>
+ 	      </constructor-arg>
+           <constructor-arg  ref="dateFormat"/>
+ 	</bean>
+ 	
+ 	<!-- using factory-method we invoke static method to create an object -->
+ 	<bean id = "dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"></bean>
 	
 	<bean id="monitor" class="com.tutorial.project.Monitor"/>
 	<bean id="awared" class="com.tutorial.project.AwareBean" init-method="init"/>
 		
 	<import resource="loggers.xml"/>
-		
-</beans>
-	
-	
-	
-	
+ 		
+ </beans>
+ 
+ 
+ 	

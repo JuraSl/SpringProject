@@ -2,9 +2,17 @@ package com.tutorial.project;
 
 import java.util.Collection;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+
+@SuppressWarnings("restriction")
+@Component
 public class CombinedEventLogger implements EventLogger{
 
-	private final Collection<EventLogger> loggers;
+	
+	@Resource(name="combinedLoggers")
+	private Collection<EventLogger> loggers;
 	
 	CombinedEventLogger(Collection<EventLogger> loggers){
 		super();

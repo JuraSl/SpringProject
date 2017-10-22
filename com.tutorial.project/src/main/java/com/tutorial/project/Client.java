@@ -2,11 +2,6 @@ package com.tutorial.project;
 
 public class Client {
 	
-	Client(String id, String name){
-		this.id = id;
-		this.name = name;
-	}
-
 	private String id;
 	private String name;
 	private String greeting;

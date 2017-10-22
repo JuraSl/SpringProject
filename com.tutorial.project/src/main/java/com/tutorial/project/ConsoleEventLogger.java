@@ -1,5 +1,8 @@
 package com.tutorial.project;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ConsoleEventLogger implements EventLogger{
 
 	public void logEvent(String msg) {

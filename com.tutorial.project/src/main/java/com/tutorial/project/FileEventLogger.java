@@ -7,17 +7,28 @@ package com.tutorial.project;
 
 import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
 
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+
+@SuppressWarnings("restriction")
+@Component
 public class FileEventLogger implements EventLogger{
 
+	public FileEventLogger(){}
 	public FileEventLogger(String fileName) {
 		super();
 		this.fileName = fileName;
 	}
 	private String fileName;
+	
+	@Value("${events.file:target/events_log.txt}")
 	private File file;
 	
+	@PostConstruct
 	public void init(){
 		file = new File(fileName);
 		if(file.exists() && !file.canWrite()){
