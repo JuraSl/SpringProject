@@ -20,12 +20,12 @@ public class FileEventLogger implements EventLogger{
 
 	public FileEventLogger(){}
 	public FileEventLogger(String fileName) {
-		super();
 		this.fileName = fileName;
 	}
-	private String fileName;
 	
 	@Value("${events.file:target/events_log.txt}")
+	private String fileName;
+	
 	private File file;
 	
 	@PostConstruct

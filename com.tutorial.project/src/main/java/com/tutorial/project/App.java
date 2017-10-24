@@ -2,18 +2,31 @@ package com.tutorial.project;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
+@SuppressWarnings({ "restriction", "unused" })
+@Service
 public class App {
 	
+	@Autowired
     private Client client;
+	
+	@Resource(name="defaultLogger")
 	private EventLogger defaultLogger;
+	
+	@Resource(name="loggerMap")
 	private Map<EventType, EventLogger> loggers;
 	
+	public App() {}
+	
 	App(Client client, CacheFileEventLogger eventLogger, Map<EventType, EventLogger> loggers){
-		super();
 		this.client = client;
 		this.defaultLogger = eventLogger;
 		this.loggers = loggers;
@@ -22,12 +35,17 @@ public class App {
 	public static void main(String[] args) {
 		
 		// Create spring container object
-		// this context has method registerShutdownHook() that invokes method close()
-	    ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+		ctx.register(AppConfig.class, LoggerConfig.class);
+		ctx.scan("com.tutorial.project");
+		ctx.refresh();
 		
 	    // Get bean from container
 	    App app = (App) ctx.getBean("app");
 		
+	    Client client = ctx.getBean(Client.class);
+	    System.out.println("Client says: " + client.getGreeting());
+	    
 	    Event event = ctx.getBean(Event.class);
 	    app.logEvent(EventType.ERROR, event, "Some event for 1");
 	   
