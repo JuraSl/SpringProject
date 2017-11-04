@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
 
 @SuppressWarnings("restriction")
 @Component
-public class FileEventLogger implements EventLogger{
+public class FileEventLogger extends AbstractEventLogger{
 
 	public FileEventLogger(){}
 	public FileEventLogger(String fileName) {

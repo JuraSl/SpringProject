@@ -3,7 +3,7 @@ package com.tutorial.project;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ConsoleEventLogger implements EventLogger{
+public class ConsoleEventLogger extends AbstractEventLogger{
 
 	public void logEvent(String msg) {
 		System.out.println(msg);

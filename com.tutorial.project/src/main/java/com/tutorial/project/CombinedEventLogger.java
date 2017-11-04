@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 @SuppressWarnings("restriction")
 @Component
-public class CombinedEventLogger implements EventLogger{
+public class CombinedEventLogger extends AbstractEventLogger{
 
-	
+	// JDK Annotation using just on fields and setters(name's bean state)
 	@Resource(name="combinedLoggers")
 	private Collection<EventLogger> loggers;
 	
