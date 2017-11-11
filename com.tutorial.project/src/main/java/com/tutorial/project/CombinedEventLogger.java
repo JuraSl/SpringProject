@@ -15,6 +15,12 @@ public class CombinedEventLogger extends AbstractEventLogger{
 	@Resource(name="combinedLoggers")
 	private final Collection<EventLogger> loggers;
 	
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
 	public CombinedEventLogger(Collection<EventLogger> loggers) {
 		super();
 		this.loggers = loggers;

@@ -39,7 +39,11 @@
  	<bean id="app" class="com.tutorial.project.App">
  	      <constructor-arg ref="client"/>
  	      <constructor-arg ref="cacheFileEventLogger"/>  
-	      <constructor-arg ref="loggerMap"/>    
+	      <constructor-arg ref="loggerMap"/>  
+	      
+	      <property name="startupMessage" value="#{'Hello user ' +
+            ( systemProperties['os.arch'].equals('x86') ? 
+                systemEnvironment['USERNAME'] : systemEnvironment['USER'] ) }"/>  
  	</bean>
  	
  	<!-- Using EL to create statics -->

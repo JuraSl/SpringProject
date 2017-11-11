@@ -18,15 +18,15 @@ import javax.annotation.PostConstruct;
 @Component
 public class FileEventLogger extends AbstractEventLogger{
 
-	public FileEventLogger(){}
-	public FileEventLogger(String fileName) {
-		this.fileName = fileName;
-	}
+	private File file;
 	
 	@Value("${events.file:target/events_log.txt}")
 	private String fileName;
 	
-	private File file;
+	public FileEventLogger(){}
+	public FileEventLogger(String fileName) {
+		this.fileName = fileName;
+	}
 	
 	@PostConstruct
 	public void init(){

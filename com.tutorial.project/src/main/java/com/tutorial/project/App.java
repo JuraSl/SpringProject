@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 @Service
 public class App {
 	
+	// injecting Client bean
 	@Autowired
     private Client client;
 	
@@ -23,6 +24,8 @@ public class App {
 	
 	@Resource(name="loggerMap")
 	private Map<EventType, EventLogger> loggers;
+
+	private String startupMessage;
 	
 	public App() {}
 	
@@ -35,13 +38,17 @@ public class App {
 	public static void main(String[] args) {
 		
 		// Create spring container object
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+		/*AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		ctx.register(AppConfig.class, LoggerConfig.class);
 		ctx.scan("com.tutorial.project");
 		ctx.refresh();
+		*/
+		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		
 	    // Get bean from container
 	    App app = (App) ctx.getBean("app");
+	    
+	    System.out.println(app.startupMessage);
 		
 	    Client client = ctx.getBean(Client.class);
 	    System.out.println("Client says: " + client.getGreeting());
@@ -70,5 +77,9 @@ public class App {
 		   logger = defaultLogger;
 		}
 		logger.logEvent(event);
+	}
+	
+	public void setMessage(String message){
+		this.startupMessage = message;
 	}
 }

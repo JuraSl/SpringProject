@@ -18,8 +18,8 @@ public class Event {
 	private int id;
 	private String msg;
 	
-	@Autowired
-	@Qualifier("newDate")
+	@Autowired                // injecting bean by type
+	@Qualifier("newDate")     // stating name of the bean (Spring annotation)
 	private Date date;
 	
 	@Autowired
@@ -47,6 +47,10 @@ public class Event {
 	public String toString() {
 		return "Event [id=" + id + ", msg=" + msg + ", date=" + date
 				+ ", dateFormat=" + df.format(date) + "]";
+	}
+	
+	public static void isDay(Date date){
+		
 	}
 
 }

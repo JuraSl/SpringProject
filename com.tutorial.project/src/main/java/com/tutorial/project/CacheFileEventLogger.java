@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @SuppressWarnings({ "unused", "restriction" })
+// defining bean as Component
 @Component
 public class CacheFileEventLogger extends FileEventLogger{
 	
