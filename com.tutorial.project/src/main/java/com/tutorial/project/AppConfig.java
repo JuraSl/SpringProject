@@ -22,6 +22,7 @@ public class AppConfig {
 	@Autowired
 	Environment environment;
 	
+	// Annotation returns objects
 	@Bean
 	public Date newDate(){
 		return new Date();

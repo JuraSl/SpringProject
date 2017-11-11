@@ -29,7 +29,7 @@ public class App {
 	
 	public App() {}
 	
-	App(Client client, CacheFileEventLogger eventLogger, Map<EventType, EventLogger> loggers){
+	App(Client client, EventLogger eventLogger, Map<EventType, EventLogger> loggers){
 		this.client = client;
 		this.defaultLogger = eventLogger;
 		this.loggers = loggers;
@@ -79,7 +79,9 @@ public class App {
 		logger.logEvent(event);
 	}
 	
-	public void setMessage(String message){
-		this.startupMessage = message;
+	
+
+	public void setStartupMessage(String startupMessage) {
+		this.startupMessage = startupMessage;
 	}
 }

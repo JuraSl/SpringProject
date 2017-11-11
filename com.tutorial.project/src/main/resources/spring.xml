@@ -8,7 +8,7 @@
     xmlns:c="http://www.springframework.org/schema/c"
     xsi:schemaLocation="
   		http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
  		http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-3.2.xsd">
         
@@ -30,20 +30,21 @@
 	     <entry key="ERROR" value-ref="combinedEventLogger"/>
     </util:map>
  
-	<bean id="client" class="com.tutorial.project.Client" 
-	      p:greeting="${client.greeting}">
-	      <constructor-arg index="0" value="${client.id}" />
-	      <constructor-arg value = "${client.name}"/>
+	<bean id="client" class="com.tutorial.project.Client" p:greeting="${greeting}">
+	      <constructor-arg index="0" value="${id}" />
+	      <constructor-arg value = "${name}"/>
  	</bean>
  	
  	<bean id="app" class="com.tutorial.project.App">
  	      <constructor-arg ref="client"/>
- 	      <constructor-arg ref="cacheFileEventLogger"/>  
-	      <constructor-arg ref="loggerMap"/>  
+	      <constructor-arg value="#{T(com.tutorial.project.Event).isDay(8, 17)? 
+	      cashFileEventLogger : consoleEventLogger}"/> 
+	      <constructor-arg ref="loggerMap"/>
 	      
 	      <property name="startupMessage" value="#{'Hello user ' +
             ( systemProperties['os.arch'].equals('x86') ? 
-                systemEnvironment['USERNAME'] : systemEnvironment['USER'] ) }"/>  
+                systemEnvironment['USERNAME'] : systemEnvironment['USER'] ) } 
+                + '. Default logger is ' + app.defaultLogger.name }"/> 
  	</bean>
  	
  	<!-- Using EL to create statics -->

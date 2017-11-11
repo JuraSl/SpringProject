@@ -1,6 +1,7 @@
 package com.tutorial.project;
 
 import java.text.DateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -49,8 +50,9 @@ public class Event {
 				+ ", dateFormat=" + df.format(date) + "]";
 	}
 	
-	public static void isDay(Date date){
-		
+	public static boolean isDay(int start, int end){
+		LocalTime time = LocalTime.now();
+		return time.getHour() > start && time.getHour() < end;
 	}
 
 }
